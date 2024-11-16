@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | Mobido</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+
+    <!-- Firebase SDK (Correct version for Firebase v9+ modular imports) -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBO9832ypX-lUcmcbTk6wLwBMFMEZLv-5U",
+            authDomain: "trialforgeekahertz.firebaseapp.com",
+            projectId: "trialforgeekahertz",
+            storageBucket: "trialforgeekahertz.appspot.com",
+            messagingSenderId: "439004020381",
+            appId: "1:439004020381:web:07e7b97b531cf59b3ade74"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app); // Get the Firebase Auth instance
+
+        // Event listener for form submission
+        document.querySelector('.form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const email = document.querySelector('#email').value;
+            const password = document.querySelector('#password').value;
+
+            // Create user with email and password
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert('Signup successful');
+                    window.location.href = 'home.html';  
+                })
+                .catch((error) => {
+                    alert('Error: ' + error.message);
+                });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <form class="form">
+            <h2>Sign Up</h2>
+
+            <div class="input-group">
+                <label for="Username">Username</label>
+                <input type="username" id="username" name="username" required>
+            </div>
+
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+            <p>Already have an Account? <a href="login.html">Login here</a></p>
+        </form>
+    </div>
+</body>
+</html>

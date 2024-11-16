@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    
+    <title>Mobido</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+    
+    <h1>
+        <img src="MobidoLogo.png"  style="height: 40px; margin-right: 10px;">
+        Mobido
+    </h1>
+    
+    <div style="position: absolute;">
+        
+        <p id="balance" style="position: absolute; top: 2px; right: 670px; width: 250px; ">Your Sepolia Balance</p>
+    </div>
+
+    <button id="connect" type="button" value="Connect" onclick="web3MetaOpen()" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ; width: 12em; border-radius: 20px; background-color: rgb(40, 117, 184); align-items: last baseline; vertical-align: middle; margin-right: -1700px; padding-left: 100; vertical-align: baseline; align-items:first baseline; position:absolute; top: 5px;"><i class="fa fa-user-circle-o"  style="margin-right: 10px; size: 4em;"></i>Login/Sign Up</button>
+    <p style="text-align: left; font-size: 6em; line-height: 85px;  color: rgba(61, 120, 172, 0.473); font: bolder; width: 20em; position: absolute; top: 60px; left: 100px;">Hi, Changemaker.</p>
+    
+    <div class="transferMBD" style="position: absolute; top: 300px; ">
+
+        <p style="font-size: 2em; background-color: rgb(39, 67, 221); border-radius: 50px; padding-left: 750px; padding-right: 750px; color: aliceblue;">Transfer MDT</p>
+        <div style="position: relative; top: -80px; border-radius: 50px; padding-left: 750px; padding-right: 750px; height: 225px; background-color: rgba(82, 76, 165, 0.219); z-index: -1;">
+        </div>
+        <input type="text" id="recipient" placeholder="Enter recipient address" style="position: absolute; top: 100px; color: rgb(0, 0, 0); background-color: rgba(80, 53, 201, 0.192); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; border: 5px; border-radius: 50px; height: 50px; align-items: start; -webkit-text-fill-color: black; width: max-content; left: 50px; width: 1000px; border-width: 10px; border-color: black; font-size: 20px;padding-left: 20px;">
+        <input type="number" id="amount" placeholder="Enter amount" style="position: absolute; top: 175px; color: rgb(0, 0, 0); background-color: rgba(80, 53, 201, 0.192); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; border: 5px; border-radius: 50px; height: 50px; align-items: start; -webkit-text-fill-color: black; width: max-content; left: 50px; width: 1000px; border-width: 10px; border-color: black; border: 2px; font-size: 20px;padding-left: 20px;" >
+        <p id="status" style="position: absolute; top: 175px; right: 235px;">Feel Free to transfer</p>
+        <button id="transferButton" onclick="transferToks()" 
+        style="
+            position: absolute; 
+            font-size: 30px; 
+            background-color: rgba(21, 87, 163, 0); 
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+            width: 400px; 
+            border-radius: 50px; 
+            top: 100px; 
+            right: 120px; 
+            border-color: black; 
+            border-width: 2px; 
+            border-style: solid; 
+            outline: 3px solid black; /* Added outline */
+            color: black;
+        ">Transfer Tokens</button>
+
+</div>
+
+<div style="position: absolute; top: 625px; width: 100vw; z-index: -1; background-color: rgb(0, 62, 231); height: 400px; color: rgb(128, 177, 233); display: flex; align-items: center; justify-content: flex-start; padding-left: 100px; font-size: 6em; ">
+    <div>
+        Pay Sustainably. <br>Earn Unconditionally. 
+    </div>
+    <img src="homescreenimg1.png" alt="Sustainability Image" style="height: 500px; filter: invert(100%); right: 250px; position:absolute; top: -30px;">
+    <img src="homescreenimg1.png" alt="Sustainability Image" style="height: 500px; filter: invert(100%); right: -120px; position:absolute; top: -30px; transform: rotateY(180deg);">
+</div>
+
+<div style="position: absolute; width: 100vw; height: 500px; top: 1025px; color: rgb(4, 63, 27); background-color: rgb(255, 255, 255); z-index: -1;display: flex; align-items: center; justify-content: flex-end; padding-right: 150px; font-size: 10em; text-align: right; font: bolder; line-height: 155px;">
+    <!-- Background Image with Opacity -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('homescreenenvironment.png'); background-size: 400px; background-position: center; opacity: 0.7; z-index: -1;"></div>
+    
+    <!-- Text Content -->
+    Know <br>your <br>Reward.
+
+    <!-- <button style="position: absolute; width: 980px; height: 150px; top: 75px; background-color: rgba(70, 130, 179, 0.459); right: 900px; border-radius: 20px; outline: 3px solid rgb(3, 44, 15); font-size: 0.25em; line-height: 40px; text-align: center; vertical-align: middle; color: rgb(30, 32, 34);justify-content: center;">
+        <span style="font-size: 1.5em; font-weight: bold; display: block;"><br>Collect</span>
+        <span style="font-size: 0.5em;font: italic;font-style: italic;">For walking 10,347 steps today</span>
+    </button> -->
+    
+
+    <span style="position: absolute; width: 980px; height: 275px; top: 75px; background-color: rgba(50, 86, 207, 0.459); right: 900px; border-radius: 20px; outline: 3px solid rgb(3, 44, 15); font-size: 0.25em; line-height: 40px; text-align: center; vertical-align: middle; color: rgb(30, 32, 34);justify-content: center;padding-top: 5px;">
+        <span style="font-size: 1.5em; font-weight: bold; display: block;"><br>1% instant Crypto-back</span>
+        <span style="font-size: 0.5em;font: italic;font-style: italic;">On every MDT Transaction done<br> <br>Exciting right?</span>
+    </span>
+    
+</div>
+
+<p style="text-align: center; font-size: 8em; line-height: 85px;  color: rgba(61, 120, 172, 0.473); font: bolder; width: 20em; position: absolute; top: 1450px;">Did you Know?</p>
+
+
+
+
+    <div class="tokenCirc" style="position: absolute; top: 1750px; right: 1000px;width: 800px;height: 300px;">
+        <p style="color: rgb(28, 51, 51); font-size: 40px; text-align: center;">Number of Tokens in Circulation</p>
+        <p id="tokenincirc" style="color: rgb(2, 2, 92); font-size: 6em; padding: top -50px; margin-top: -30px ; margin-bottom: -18px;">695.9 MDT</p>
+    </div> 
+
+    <div class="tokenCirc" style="position: absolute; top: 1750px; right: 100px;width: 800px;height: 300px;">
+        <p style="color: rgb(28, 51, 51); font-size: 40px; text-align: center;">Number of Transactions done</p>
+        <p id="numberOfTransactions" style="color: rgb(2, 2, 92); font-size: 6em; padding: top -50px; margin-top: -30px ; margin-bottom: -18px;">00000000</p>
+    </div> 
+
+    <!-- <div class="holdToken">
+        <p style="color: rgb(28, 51, 51);">Number of Holders</p>
+        <p id="holdTok" style="color: rgb(2, 2, 92); font-size: 4em; padding: top -50px; margin-top: -30px ; margin-bottom: -18px;">Loading...</p>
+    </div> -->
+
+    <div class="balToken" style="line-height: 45px; position: absolute; top: 110px; left: 1000px; color: rgba(192, 210, 226, 0.548);">
+    <p style="color: rgba(57, 74, 168, 0.774); font-size: 2em; vertical-align: top; margin-top: -25px;">You have</p>
+        <p id="balToken" style="color: rgb(2, 2, 92); font-size: 4em; padding: top -10px; margin-top: -30px ; margin-bottom: -18px;">XXX MDT</p>
+
+  
+    </div>
+
+
+    <div style="position: absolute; top: 2175px; width: 100vw; z-index: -1; background-color: rgb(7, 143, 255); height: 300px; color: rgb(0, 49, 104); display: flex; align-items: center; justify-content: center; font-size: 4em; font-style: italic; text-align: center;font-size: 80px;">
+        <!-- This will place the image behind the text -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('homescreen5.png'); background-size: cover; background-position: center; background-repeat: no-repeat; opacity: 0.35; filter: grayscale(100%) brightness(200%);"></div>
+        
+        <!-- Text Content -->
+        <div style="z-index: 1; position: relative;">
+            Pay for Taxi rides. Bus Rides. And Much More.
+        </div>
+    </div>
+
+    <div id="donateBtn"style="position: absolute; top: 2450px; background-color: aliceblue; z-index: 1; width: 100vw; height: 300px; display: flex; justify-content: space-between; align-items: center; padding-left: 400px; padding-right: -150px; font-size: 60px; color: rgb(57, 20, 160);">
+        <div>
+            Donate and be a part<br> of the Change! 
+        </div>
+        <button onclick="topFunction()" style="background-color: #2c0fd3; color: white; border: none; padding: 20px 40px; font-size: 20px; cursor: pointer; border-radius: 10px;width: 500px;margin-right: 500px;margin-top: 50px;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Donate Now   </button>
+    </div>
+    
+    <div style="position: absolute; top: 2750px;  background-image: radial-gradient(rgb(186, 155, 226), rgb(198, 159, 243), rgb(174, 116, 240)); z-index: 1; width: 100vw; height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center;  font-size: 60px; color: rgb(57, 20, 160); text-align: center;vertical-align: baseline;">
+        <div>
+            Get in the Experiment!
+        </div>
+        <!-- <p style="font-size: 30px; color: rgb(57, 20, 160); margin-top: 150px;opacity: 0.5;">Join our testnet liquidity pool</p> -->
+        <p style="font-size: 30px; color: rgb(57, 20, 160); top: 280px;position: absolute;">Join our Testnet Liquidity Pool</p>
+        <p style="font-size: 30px; color: rgb(57, 20, 160); top: 320px;position: absolute;opacity: 0.3;">Join our Testnet Liquidity Pool</p>
+
+        <p style="font-size: 25px; color: rgb(57, 20, 160); top: 320px;position: absolute;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-style: italic;"><br><br><br><br>Just paste  <br><br><b>0xAB7174560409E7608ecD84e306999CD0595bfB9b</b><br> <br>on Uniswap and buy some of MDT on the liquidity pool <br> and see the magic unravel!</p>
+    </div>
+
+
+    <div style="position: absolute; top: 3550px;   z-index: 1; width: 100vw; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center;  font-size: 30px; color: rgb(18, 8, 109); text-align: center;vertical-align: baseline;">
+        <div>
+            Made by Amey Aggarwal. <br> Contact us at:    mobido.token@gmail.com
+        </div>
+      
+         </div>
+       
+    
+
+    
+    
+
+
+ 
+
+   
+
+
+    <script>
+        const etherscanAPIKey = 'QEPQPQ5AWA7Q9QRFWJAD74D6Q13YJMSV4F';  
+        let web3;
+        let senderAddress;
+        let transactionCount = 0;
+        let contractAddress = '0xAB7174560409E7608ecD84e306999CD0595bfB9b';
+        let ABIOfToken;  // Ensure this is defined with the correct ABI of your token contract
+        let mybutton = document.getElementById("donateBtn");
+        let recipientBtn = document.getElementById("recipient");
+
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            recipientBtn.innerText = "0x276fB6D26434c78957E1Dc25C0CE304b5232ABec"; // Set recipient address
+        }
+
+        const tokenABI = [
+                        {
+                            "constant" : true,
+                            "inputs" : [{"name": "account", "type": "address"}],
+                            "name":"balanceOf",
+                            "outputs": [{"name": "balance", "type": "uint256"}],
+                            "payable" : false,
+                            "stateMutability" : "view",
+                            "type" : "function"
+                        },
+                        {
+                            "constant" : false,
+                            "inputs" : [{"name": "recipient", "type": "address"}, {"name": "amount", "type": "uint256"}],
+                            "name":"transfer",
+                            "outputs": [{"name": "", "type": "bool"}],
+                            "payable" : false,
+                            "stateMutability" : "nonpayable",
+                            "type" : "function"
+                        }
+                    ]
+        ABIOfToken = tokenABI;
+        function updateTransactionCount(){
+            const numberElement = document.getElementById('numberOfTransactions');
+            
+            numberElement.innerText=transactionCount;
+            transactionCount++;
+            setTimeout(updateTransactionCount, 1000);
+        }
+
+        window.onload = function() {
+            updateTransactionCount();}
+
+        function web3MetaOpen(){
+            if (window.ethereum) {
+                window.ethereum.request({
+                    method: 'eth_requestAccounts'
+                    
+                }).then(result => { //enter code from this line
+                    const address = result[0];  
+                    senderAddress = result[0];
+                    console.log('Address:', address);
+                    loginSignBtn = document.getElementById('connect')
+                    loginSignBtn.style.display = 'none';
+
+                    const proxyUrl = `https://api.allorigins.win/get?url=`;
+                    const targetUrl = encodeURIComponent(`https://api-sepolia.etherscan.io/api?module=account&action=balance&address=${address}&tag=latest&apikey=${etherscanAPIKey}`);
+                    const url = proxyUrl + targetUrl;
+
+
+                    
+                    contractAddres = contractAddress;
+                    const tokenDetailsSupply = encodeURIComponent(`https://api-sepolia.etherscan.io/api?module=stats&action=tokensupply&contractaddress=${contractAddress}&apikey=${etherscanAPIKey}`);
+                    const tokUrl = proxyUrl + tokenDetailsSupply
+                    console.log('TokenSupUrl', tokUrl)
+
+                    const tokenDetHolder = encodeURIComponent(`https://api-sepolia.etherscan.io/api?module=stats&action=tokenholdercount&contractaddress=${contractAddress}&apikey=${etherscanAPIKey}`);
+                    const tokHoldUrl = proxyUrl + tokenDetHolder
+                    //console.log('TokenHoldUrl', tokHoldUrl)
+
+                    const tokenBalance = encodeURIComponent(`https://api-sepolia.etherscan.io/api?module=account&action=tokenbalance&contractaddress=${contractAddress}&address=${address}&tag=latest&apikey=${etherscanAPIKey}`);
+                    const tokBalUrl = proxyUrl + tokenBalance
+                    console.log('tokBalUrl', tokBalUrl)
+
+
+                    console.log('Request URL:', url);
+                    
+                    //transferAmount
+                    
+                   
+                    
+
+
+
+
+                    
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Full API Response:', data);
+
+                            if (data && data.contents) {
+                                const jsonResponse = JSON.parse(data.contents);  
+                                console.log('Parsed API Response:', jsonResponse); 
+
+                                if (jsonResponse.status === "1") {
+                                    const balanceWei = jsonResponse.result;  
+                                    console.log('Balance in Wei:', balanceWei); 
+
+                                    const balanceEth = Web3.utils.fromWei(balanceWei, 'ether'); 
+                                     
+                                    console.log('Balance in Ether (S-ETH):', balanceEth); 
+
+                                    document.getElementById('balance').innerText = `Balance: ${parseFloat(balanceEth).toFixed(4)} S-ETH`;
+                                } else {
+                                    document.getElementById('balance').innerText = `Error fetching balance: ${jsonResponse.message || 'Invalid status'}`;
+                                    console.error('API Error:', jsonResponse.message);  
+                                }
+                            } else {
+                                document.getElementById('balance').innerText = 'Error fetching balance: No content';
+                                console.error('Error: No content in the response');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching data:', error);
+                            document.getElementById('balance').innerText = 'Error fetching balance';
+                        });
+
+                fetch(tokUrl)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Full API Response (Total Supply):', data);
+                    if (data && data.contents) {
+                        const jsonResponse = JSON.parse(data.contents);
+                        console.log('Parsed API Response (Total Supply):', jsonResponse);
+
+                        if (jsonResponse.status === "1") {
+                            const totalSupply = jsonResponse.result;
+                            const totalNewSupply = totalSupply/1000000000000000000 + ' MDT'
+                            document.getElementById('tokenincirc').innerText = `${totalNewSupply}`, 'Tokens';
+                        } else {
+                            document.getElementById('tokenincirc').innerText = `Error fetching total supply: ${jsonResponse.message || 'Invalid status'}`;
+                        }
+                    } else {
+                        document.getElementById('tokenincirc').innerText = 'Error fetching total supply: No content';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching total supply:', error);
+                    document.getElementById('tokenincirc').innerText = 'Error fetching total supply';
+                });
+
+                // fetch(tokHoldUrl)
+                // .then(response => response.json())
+                // .then(data => {
+                //     console.log('Full API Response (Total Supply):', data);
+                //     if (data && data.contents) {
+                //         const jsonResponse = JSON.parse(data.contents);
+                //         console.log('Parsed API Response (Total Supply):', jsonResponse);
+
+                //         if (jsonResponse.status === "1") {
+                //             const totalHolders = jsonResponse.result;
+                //             // const totalNewSupply = totalSupply
+                //             document.getElementById('holdTok').innerText = `${totalHolders}`;
+                //         } else {
+                //             document.getElementById('holdTok').innerText = `Error fetching total holders: ${jsonResponse.message || 'Invalid status'}`;
+                //         }
+                //     } else {
+                //         document.getElementById('holdTok').innerText = 'Error fetching total holders: No content';
+                //     }
+                // })
+                // .catch(error => {
+                //     console.error('Error fetching total holders:', error);
+                //     document.getElementById('holdTok').innerText = 'Error fetching total holders';
+                // });
+                
+                fetch(tokBalUrl)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Full API Response (your Supply):', data);
+                    if (data && data.contents) {
+                        const jsonResponse = JSON.parse(data.contents); 
+                        console.log('Parsed API Response (your Supply):', jsonResponse);
+
+                        if (jsonResponse.status === "1") {
+                            const balance = jsonResponse.result;  // The token balance
+                            if (balance) {
+                                const balanceInTokens = Web3.utils.fromWei(balance, 'ether');  // Convert balance from smallest unit
+                                console.log(balanceInTokens, 'tokens');
+                                document.getElementById('balToken').innerText = `${parseFloat(balanceInTokens).toFixed(2)} MDT`;
+                            } else {
+                                console.error('Invalid balance response');
+                                document.getElementById('balToken').innerText = 'Error fetching balance';
+                            }
+                        } else {
+                            console.error('Error fetching balance:', jsonResponse.message);
+                            document.getElementById('balToken').innerText = `Error: ${jsonResponse.message || 'Invalid status'}`;
+                        }
+                    } else {
+                        document.getElementById('balToken').innerText = 'Error fetching balance: No content';
+                        console.error('Error: No content in the response');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching your supply:', error);
+                    document.getElementById('balToken').innerText = 'Error fetching balance';
+                });
+
+                }); //till here
+            } else {
+                alert('Please install MetaMask');
+                window.open('https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn', '_blank');
+            }
+        }
+        
+        async function transferToks() {
+            let web3;
+
+            if (typeof window.ethereum !== 'undefined') {
+            // Create a new Web3 instance using the provider (MetaMask, etc.)
+            web3 = new Web3(window.ethereum);
+            } else if (typeof Web3 !== 'undefined') {
+            // Fallback in case window.ethereum is not available
+            web3 = new Web3(Web3.givenProvider);
+            } else {
+            // Handle Web3 not being available
+            document.getElementById('status').textContent = "Web3 not initialized.";
+            return;
+                }
+
+            if (!Web3){
+                document.getElementById('status').textContent = "Web3 not initialized.";
+                return;
+            }
+                        const recipient = document.getElementById('recipient').value;
+                        const amount = document.getElementById('amount').value;
+                        console.log(amount, recipient, 'Vals For Transfer')
+
+                        if (!Web3.utils.isAddress(recipient)) {
+                        document.getElementById('status').textContent = "Invalid recipient address";
+                        return;
+                        }
+
+                        if (isNaN(amount) || amount <= 0) {
+                            document.getElementById('status').textContent = "Invalid amount";
+                            return;
+                        }
+
+                        const tokenContract = new web3.eth.Contract(ABIOfToken, contractAddres);
+
+                        try {
+                            // Get the current wallet balance
+                            const balance = await tokenContract.methods.balanceOf(senderAddress).call();
+                            const balanceInTokens = Web3.utils.fromWei(balance, 'ether');
+                            
+                            if (parseFloat(amount) > parseFloat(balanceInTokens)) {
+                                document.getElementById('status').textContent = "Insufficient balance!";
+                                return;
+                            }
+
+                            // Send the transfer transaction
+                            const transferAmount = Web3.utils.toWei(amount, 'ether');
+                            changeStatusTxt();
+                            await tokenContract.methods.transfer(recipient, transferAmount).send({ from: senderAddress });
+
+                            document.getElementById('status').textContent = "Transaction Successful!";
+                            existTok = document.getElementById('balToken').innerText;
+                            newTok = existTok - amount;
+                            document.getElementById('balToken').innerText = `${newTok}`
+                            
+                        } catch (error) {
+                            console.error(error);
+                            document.getElementById('status').textContent = "Transaction failed!";
+                        }
+                    
+
+                    }
+
+                    async function changeStatusTxt(){
+                        document.getElementById('status').textContent = "Transaction In Process!";
+                    }
+    </script>
+</body>
+</html>
